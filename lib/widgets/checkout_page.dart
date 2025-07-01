@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:live_tickets/colors.dart';
-import 'package:live_tickets/main.dart';
-import 'package:live_tickets/widgets/user_data.dart';
+import 'package:mobile_app/colors.dart';
+import 'package:mobile_app/main.dart';
+import 'package:mobile_app/screens/home_screen.dart';
+import 'package:mobile_app/widgets/user_data.dart';
 
 class BuyTicket extends StatefulWidget {
   final String title;

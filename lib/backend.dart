@@ -3080,6 +3080,64 @@ List<Map<String, Object>> fetchEvents(String path) {
       "state": 1,
       "activityType": "",
       "__typename": "Activity"
+    },
+    {
+      "id": "75473",
+      "title": "Circo de la Chola Chabuca",
+      "description": "Un circo para toda la familia",
+      "video": "",
+      "slug": "lima-circo",
+      "url": "lima-circo",
+      "images": {
+        "activityImage": {
+          "full": {
+            "url":
+                "https://cdn.teleticket.com.pe/especiales/circo-chola-chabuca-2023/images/rev015_rs.jpg"
+          }
+        },
+        "__typename": "ActivityImages"
+      },
+      "pricing": {
+        "isFree": false,
+        "code": "PEN",
+        "symbol": "S/",
+        "amount": 20,
+        "__typename": "ActivityPricing"
+      },
+      "geolocation": {
+        "city": "lima",
+        "country": {"code": "PE"},
+        "address": "Avenida Canaval y Moreyra 328 San Isidro, Lima, Lima.",
+        "geopoint": {"latitude": -12.087017, "longitude": -77.049118},
+        "__typename": "ActivityGeolocation"
+      },
+      "date": {
+        "starts": "2025-07-12T18:00:00.000Z",
+        "ends": "2024-07-28T00:00:00.000Z",
+        "__typename": "ActivityDate"
+      },
+      "metadatas": [],
+      "settings": {"foreignActivity": false, "__typename": "ActivitySettings"},
+      "categories": {
+        "main": {
+          "name": "Entretenimiento",
+          "slug": "entertainment",
+          "__typename": "Category"
+        },
+        "__typename": "Categories"
+      },
+      "organizer": {
+        "id": "4021687",
+        "slug": null,
+        "firstName": "Circo",
+        "lastName": "Chola Chabuca",
+        "__typename": "ActivityOrganizer"
+      },
+      "isPast": false,
+      "soldOut": false,
+      "state": 1,
+      "activityType": "",
+      "__typename": "Activity"
     }
   ];
 }

@@ -1,120 +1,84 @@
+// main.dart - Configuración inicial
 import 'package:flutter/material.dart';
-import 'package:live_tickets/backend.dart';
-import 'package:live_tickets/colors.dart';
-import 'package:live_tickets/connection.dart';
-import 'package:live_tickets/schemas.dart';
-import 'package:live_tickets/widgets/event_card.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:mobile_app/screens/login_screen.dart';
+import 'package:mobile_app/screens/home_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+    url: 'https://ccpuhacxxcsceroyscgo.supabase.co',
+    anonKey:
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNjcHVoYWN4eGNzY2Vyb3lzY2dvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTEzMzYzNjMsImV4cCI6MjA2NjkxMjM2M30.E5qC0gC1sFY8X3lP1w5PqCBgdWCwJbVps_M-exQDFqg',
+  );
+
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
   Widget build(BuildContext context) {
-    return const MaterialApp(debugShowCheckedModeBanner: false, home: Home());
-  }
-}
-
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  String? searchInput;
-
-  @override
-  Widget build(BuildContext context) {
-    if (!verificarConexionAInternet()) {
-      return const Scaffold(
-        body: Center(
-          child: Text('No hay conexión a internet'),
-        ),
-      );
-    }
-
-    final eventsJson = fetchEvents("/events");
-    final events = EventInformationList.fromJson(eventsJson).events;
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(135),
-          child: SafeArea(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              color: Colors.black,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Row(
-                    children: [
-                      Icon(Icons.event_seat, size: 24),
-                      SizedBox(width: 8),
-                      Text(
-                        "LiveTickets",
-                        style: TextStyle(fontSize: 24),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                  Column(
-                    children: [
-                      TextField(
-                        onChanged: (value) {
-                          setState(() {
-                            searchInput = value;
-                          });
-                        },
-                        onTapOutside: (e) {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                        },
-                        decoration: const InputDecoration(
-                          prefixIcon: Icon(Icons.search),
-                          prefixIconColor: appColor,
-                          border: OutlineInputBorder(),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                              color: appColor,
-                            ),
-                          ),
-                          hintText: 'Busca un evento',
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-        body: Scrollbar(
-          child: ListView(
-            children: events
-                .where(
-                  (event) =>
-                      searchInput == null ||
-                      event.title
-                          .toLowerCase()
-                          .contains(searchInput!.toLowerCase()),
-                )
-                .map((event) => EventCard(data: event))
-                .toList(),
-          ),
-        ),
-      ),
+      home: const AuthWrapper(),
     );
+  }
+}
+
+// Wrapper para manejar el estado de autenticación
+class AuthWrapper extends StatefulWidget {
+  const AuthWrapper({super.key});
+
+  @override
+  State<AuthWrapper> createState() => _AuthWrapperState();
+}
+
+class _AuthWrapperState extends State<AuthWrapper> {
+  User? _user;
+
+  @override
+  void initState() {
+    super.initState();
+    _getUser();
+
+    // Escuchar cambios en el estado de autenticación
+    Supabase.instance.client.auth.onAuthStateChange.listen((data) {
+      final AuthChangeEvent event = data.event;
+      final Session? session = data.session;
+
+      setState(() {
+        _user = session?.user;
+      });
+    });
+  }
+
+  void _getUser() {
+    setState(() {
+      _user = Supabase.instance.client.auth.currentUser;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _user == null ? const LoginScreen() : const Home();
+  }
+}
+
+// Funciones de utilidad para auth
+class AuthService {
+  static Future<void> signOut() async {
+    await Supabase.instance.client.auth.signOut();
+  }
+
+  static User? getCurrentUser() {
+    return Supabase.instance.client.auth.currentUser;
+  }
+
+  static bool isLoggedIn() {
+    return Supabase.instance.client.auth.currentUser != null;
   }
 }

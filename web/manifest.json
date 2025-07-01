@@ -1,6 +1,6 @@
 {
-    "name": "live_tickets",
-    "short_name": "live_tickets",
+    "name": "mobile_app",
+    "short_name": "mobile_app",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

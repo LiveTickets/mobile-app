@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:live_tickets/colors.dart';
-import 'package:live_tickets/schemas.dart';
-import 'package:live_tickets/widgets/event_detail.dart';
+import 'package:mobile_app/colors.dart';
+import 'package:mobile_app/schemas.dart';
+import 'package:mobile_app/widgets/event_detail.dart';
 
 class EventCard extends StatelessWidget {
   final EventInformation data;

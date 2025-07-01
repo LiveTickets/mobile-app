@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:live_tickets/colors.dart';
-import 'package:live_tickets/schemas.dart';
-import 'package:live_tickets/widgets/checkout_page.dart';
+import 'package:mobile_app/colors.dart';
+import 'package:mobile_app/schemas.dart';
+import 'package:mobile_app/widgets/checkout_page.dart';
 
 class EventDetail extends StatelessWidget {
   final EventInformation data;
