@@ -1,4 +1,3 @@
-// home_organizador.dart
 import 'package:flutter/material.dart';
 import 'package:mobile_app/colors.dart';
 import 'package:mobile_app/screens/home_screen.dart';
@@ -44,8 +43,6 @@ class HomeOrganizador extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
-
-              // Bienvenida
               const Text(
                 '¡Bienvenido, Organizador!',
                 style: TextStyle(
@@ -63,13 +60,10 @@ class HomeOrganizador extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 40),
-
-              // Botones principales
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Botón Crear Evento
                     SizedBox(
                       width: double.infinity,
                       height: 120,
@@ -117,10 +111,7 @@ class HomeOrganizador extends StatelessWidget {
                         ),
                       ),
                     ),
-
                     const SizedBox(height: 20),
-
-                    // Botón Ver Eventos Disponibles
                     SizedBox(
                       width: double.infinity,
                       height: 120,
@@ -171,10 +162,7 @@ class HomeOrganizador extends StatelessWidget {
                   ],
                 ),
               ),
-
               const SizedBox(height: 40),
-
-              // Información adicional
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),

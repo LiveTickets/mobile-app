@@ -1,8 +1,8 @@
-// login_screen.dart
 import 'package:flutter/material.dart';
 import 'package:mobile_app/colors.dart';
 import 'package:mobile_app/screens/home_screen.dart';
 import 'package:mobile_app/screens/home_organizador.dart';
+import 'package:mobile_app/screens/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,7 +18,6 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isPasswordVisible = false;
   String? _errorMessage;
 
-  // Usuarios hardcodeados
   final Map<String, Map<String, String>> _users = {
     'user@user.com': {
       'password': 'user12345',
@@ -51,7 +50,6 @@ class _LoginScreenState extends State<LoginScreen> {
       _errorMessage = null;
     });
 
-    // Simular delay de red
     await Future.delayed(const Duration(seconds: 1));
 
     try {
@@ -60,17 +58,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (_users.containsKey(email)) {
         if (_users[email]!['password'] == password) {
-          // Login exitoso
           if (mounted) {
             final userType = _users[email]!['type'];
 
             if (userType == 'user') {
-              // Navegar al home de usuario
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => const Home()),
               );
             } else if (userType == 'organizador') {
-              // Navegar al home de organizador
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(
                     builder: (context) => const HomeOrganizador()),
@@ -114,7 +109,6 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 40),
-                // Header
                 const Row(
                   children: [
                     Icon(Icons.event_seat, size: 32, color: appColor),
@@ -137,8 +131,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 40),
-
-                // Mensaje de error
                 if (_errorMessage != null)
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -162,8 +154,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       ],
                     ),
                   ),
-
-                // Campo de email
                 TextField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -185,8 +175,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-
-                // Campo de contraseña
                 TextField(
                   controller: _passwordController,
                   obscureText: !_isPasswordVisible,
@@ -220,8 +208,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(height: 24),
-
-                // Botón de iniciar sesión
                 SizedBox(
                   width: double.infinity,
                   height: 50,
@@ -250,6 +236,32 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
                           ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterScreen()),
+                      );
+                    },
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: appColor,
+                      side: const BorderSide(color: appColor),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      'Crear Cuenta',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 40),

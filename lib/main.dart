@@ -1,4 +1,3 @@
-// main.dart - Configuración inicial
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:mobile_app/screens/login_screen.dart';
@@ -29,7 +28,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Wrapper para manejar el estado de autenticación
 class AuthWrapper extends StatefulWidget {
   const AuthWrapper({super.key});
 
@@ -45,7 +43,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
     super.initState();
     _getUser();
 
-    // Escuchar cambios en el estado de autenticación
     Supabase.instance.client.auth.onAuthStateChange.listen((data) {
       final AuthChangeEvent event = data.event;
       final Session? session = data.session;
@@ -68,7 +65,6 @@ class _AuthWrapperState extends State<AuthWrapper> {
   }
 }
 
-// Funciones de utilidad para auth
 class AuthService {
   static Future<void> signOut() async {
     await Supabase.instance.client.auth.signOut();

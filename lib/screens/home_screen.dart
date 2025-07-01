@@ -1,4 +1,3 @@
-// TODO Implement this library.// home_screen.dart
 import 'package:flutter/material.dart';
 import 'package:mobile_app/screens/login_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -44,7 +43,6 @@ class _HomeState extends State<Home> {
     final eventsJson = fetchEvents("/events");
     final events = EventInformationList.fromJson(eventsJson).events;
 
-    // Obtener información del usuario actual
     final user = Supabase.instance.client.auth.currentUser;
 
     return MaterialApp(
