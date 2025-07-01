@@ -1,4 +1,3 @@
-// crear_evento_screen.dart
 import 'package:flutter/material.dart';
 import 'package:mobile_app/colors.dart';
 import 'dart:convert';
@@ -13,7 +12,6 @@ class CrearEventoScreen extends StatefulWidget {
 class _CrearEventoScreenState extends State<CrearEventoScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  // Controladores para los campos del formulario
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
   final _addressController = TextEditingController();
@@ -236,13 +234,10 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
       _isLoading = true;
     });
 
-    // Generar JSON del evento
     final eventJson = _generateEventJson();
 
-    // Mostrar el JSON en consola (para debugging)
     print('Evento creado:');
 
-    // Simular creación del evento
     await Future.delayed(const Duration(seconds: 2));
 
     if (mounted) {
@@ -250,7 +245,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
         _isLoading = false;
       });
 
-      // Mostrar dialog con el JSON generado
       _showEventCreatedDialog(eventJson);
     }
   }
@@ -329,8 +323,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-
-                // Título de la sección
                 const Text(
                   'Información del Evento',
                   style: TextStyle(
@@ -340,8 +332,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-
-                // Campo Título
                 TextFormField(
                   controller: _titleController,
                   decoration: const InputDecoration(
@@ -361,8 +351,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Campo Descripción
                 TextFormField(
                   controller: _descriptionController,
                   maxLines: 4,
@@ -384,8 +372,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Campo Dirección
                 TextFormField(
                   controller: _addressController,
                   decoration: const InputDecoration(
@@ -406,8 +392,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Dropdown Ciudad
                 DropdownButtonFormField<String>(
                   value: _selectedCity,
                   decoration: const InputDecoration(
@@ -434,8 +418,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Dropdown Categoría
                 DropdownButtonFormField<String>(
                   value: _selectedCategory,
                   decoration: const InputDecoration(
@@ -462,8 +444,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Campo Organizador
                 TextFormField(
                   controller: _organizerNameController,
                   decoration: const InputDecoration(
@@ -483,8 +463,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Campo URL de Video
                 TextFormField(
                   controller: _videoController,
                   decoration: const InputDecoration(
@@ -499,8 +477,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-
-                // Campo URL de Imagen
                 TextFormField(
                   controller: _imageUrlController,
                   decoration: const InputDecoration(
@@ -515,8 +491,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-
-                // Sección de Fechas y Horas
                 const Text(
                   'Fecha y Hora',
                   style: TextStyle(
@@ -526,8 +500,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-
-                // Fecha y Hora de Inicio
                 Row(
                   children: [
                     Expanded(
@@ -590,8 +562,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   ],
                 ),
                 const SizedBox(height: 12),
-
-                // Fecha y Hora de Fin
                 Row(
                   children: [
                     Expanded(
@@ -654,8 +624,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   ],
                 ),
                 const SizedBox(height: 20),
-
-                // Sección de Precio
                 const Text(
                   'Precio',
                   style: TextStyle(
@@ -665,8 +633,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   ),
                 ),
                 const SizedBox(height: 16),
-
-                // Switch Gratis
                 Row(
                   children: [
                     Switch(
@@ -689,8 +655,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                   ],
                 ),
                 const SizedBox(height: 16),
-
-                // Campo Precio
                 if (!_isFree)
                   TextFormField(
                     controller: _priceController,
@@ -716,8 +680,6 @@ class _CrearEventoScreenState extends State<CrearEventoScreen> {
                     },
                   ),
                 const SizedBox(height: 40),
-
-                // Botón Crear Evento
                 SizedBox(
                   width: double.infinity,
                   height: 50,

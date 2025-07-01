@@ -49,7 +49,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
       _errorMessage = null;
     });
 
-    // Simular registro
     await Future.delayed(const Duration(seconds: 2));
 
     if (mounted) {
@@ -57,7 +56,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _isLoading = false;
       });
 
-      // Mostrar éxito y volver a login
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Cuenta creada exitosamente'),
@@ -97,7 +95,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 20),
-
                 if (_errorMessage != null)
                   Container(
                     padding: const EdgeInsets.all(12),
@@ -121,8 +118,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ],
                     ),
                   ),
-
-                // Nombre
                 TextFormField(
                   controller: _nameController,
                   decoration: const InputDecoration(
@@ -142,8 +137,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // DNI
                 TextFormField(
                   controller: _dniController,
                   keyboardType: TextInputType.number,
@@ -167,8 +160,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Email
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -192,8 +183,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Contraseña
                 TextFormField(
                   controller: _passwordController,
                   obscureText: !_isPasswordVisible,
@@ -230,8 +219,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 const SizedBox(height: 16),
-
-                // Confirmar Contraseña
                 TextFormField(
                   controller: _confirmPasswordController,
                   obscureText: !_isConfirmPasswordVisible,
@@ -266,8 +253,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   },
                 ),
                 const SizedBox(height: 30),
-
-                // Botón de Registro
                 SizedBox(
                   width: double.infinity,
                   height: 50,
@@ -301,8 +286,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-
-                // Enlace para volver a login
                 Center(
                   child: TextButton(
                     onPressed: () {
