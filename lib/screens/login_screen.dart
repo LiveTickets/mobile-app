@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_app/colors.dart';
 import 'package:mobile_app/screens/home_screen.dart';
 import 'package:mobile_app/screens/home_organizador.dart';
+import 'package:mobile_app/screens/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -250,6 +251,32 @@ class _LoginScreenState extends State<LoginScreen> {
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.w600),
                           ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: OutlinedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterScreen()),
+                      );
+                    },
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: appColor,
+                      side: const BorderSide(color: appColor),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      'Crear Cuenta',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 40),
